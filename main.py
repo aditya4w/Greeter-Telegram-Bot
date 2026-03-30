@@ -5,9 +5,6 @@ import sqlite3
 import os
 
 async def setWelcome(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    os.makedirs(os.path.expanduser('~/data'), exist_ok=True)
-    con = sqlite3.connect(os.path.expanduser('~/data/setWelcome.db'))
-    cur = con.cursor()
 
     chat_id = update.effective_chat.id
     user_id = update.effective_user.id
