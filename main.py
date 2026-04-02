@@ -1,8 +1,14 @@
-from config import TOKEN, BOT_USERNAME
+import os
+
+try:
+    from config import TOKEN, BOT_USERNAME
+except ImportError:
+    TOKEN = os.environ.get("TOKEN")
+    BOT_USERNAME = os.environ.get("BOT_USERNAME")
+
 from telegram import Update
 from telegram.ext import ContextTypes, ChatMemberHandler, ApplicationBuilder, CommandHandler
 import sqlite3
-import os
 
 async def setWelcome(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
