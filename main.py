@@ -10,6 +10,8 @@ from telegram import Update
 from telegram.ext import ContextTypes, ChatMemberHandler, ApplicationBuilder, CommandHandler
 import sqlite3
 
+DB_PATH = os.path.join(os.path.dirname(__file__), 'setWelcome.db')
+
 async def setWelcome(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     chat_id = update.effective_chat.id
@@ -26,7 +28,7 @@ async def setWelcome(update: Update, context: ContextTypes.DEFAULT_TYPE):
         return
         
     os.makedirs(os.path.expanduser('~/data'), exist_ok=True)
-    con = sqlite3.connect(os.path.expanduser('~/data/setWelcome.db'))
+    con = sqlite3.connect(DB_PATH)
     cur = con.cursor()
 
     cur.execute("CREATE TABLE IF NOT EXISTS welcome(chat_id INTEGER PRIMARY KEY, message TEXT)")
@@ -45,7 +47,7 @@ async def clearWelcome(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await update.message.reply_text("You're not an admin!")
         return
     
-    con = sqlite3.connect(os.path.expanduser('~/data/setWelcome.db'))
+    con = sqlite3.connect(DB_PATH)
     cur = con.cursor()
     cur.execute("DELETE FROM welcome WHERE chat_id = ?", (chat_id,))
     con.commit()
@@ -62,7 +64,7 @@ async def welcome(update: Update, context: ContextTypes.DEFAULT_TYPE):
     count = await context.bot.get_chat_member_count(chat_id)
 
     if member.status == 'member':
-        con = sqlite3.connect(os.path.expanduser('~/data/setWelcome.db'))
+        con = sqlite3.connect(DB_PATH)
         cur = con.cursor()
 
         cur.execute("CREATE TABLE IF NOT EXISTS welcome(chat_id INTEGER PRIMARY KEY, message TEXT)")
