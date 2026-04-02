@@ -2,6 +2,8 @@
 
 A Telegram group management bot that welcomes new members and bids farewell when they leave.
 
+[Check it out](https://t.me/theGreeter_bot)
+
 ## Features
 - Auto welcome message when someone joins
 - Farewell message when someone leaves
