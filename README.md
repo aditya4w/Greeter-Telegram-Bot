@@ -28,6 +28,7 @@ Use these in your custom welcome message:
 1. Clone the repo
 ```bash
 git clone https://github.com/aditya4w/Greeter-Telegram-Bot
+cd Greeter_TGBot
 ```
 
 2. Install dependencies
